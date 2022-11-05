@@ -94,7 +94,7 @@ kbl(weather, booktabs = T) %>%
 
 ```
 
-To match these weather station data to each county we calculate the distance to the center of each administrative region. For those municipalities within a 200 kilometers radius we obtain daily county values for temperature using inverse distance weighting techniques.
+To match these weather station data to each county we calculate the distance to the center of each administrative region. For those municipalities within a 200 kilometers radius we obtain daily county values for temperature using inverse distance weighting techniques. @tbl-WeatherIDW portrays a sample of the weighted data. state and mun are state and municipality numeric identifiers. The table shows a weighted value of weather controls for each day between 1998 and 2017. 
 
 ```{r}
 #| label: tbl-WeatherIDW
