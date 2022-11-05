@@ -1,0 +1,41 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - 01_about.qmd
+    - 02_data.qmd
+    - 03_descriptives.qmd
+
+website:
+  title: "Temperature and Mortality in Mexico"
+  navbar:
+    search: true
+    pinned: true
+    collapse: true
+    right:
+      - text: Home
+        href: about.qmd 
+      - icon: github
+        href: https://github.com/gsaabogado
+      - icon: twitter
+        href: https://twitter.com/gsaabogado
+      - text: Personal Site
+        href: https://luissarmiento.net/
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - section: "Sections"
+        contents:
+            - 01_about.qmd
+            - 02_data.qmd
+            - 03_descriptives.qmd
+
+format:
+  html:
+    theme: journal
+    css: styles.css
+    toc: true
+
+
+

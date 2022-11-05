@@ -1,0 +1,59 @@
+---
+title: "About"
+description: |
+  This website contains all the data and R-code necessary to replicate the results of the study on temperature and mortality in Mexico.
+author: "Luis Sarmiento and Thomas Longden"
+format: 
+  html: 
+    toc: true
+    warning: false
+    code-fold: true
+    code-summary: "Show the Code"
+---
+
+# Introduction
+
+The website contains four primary sections to accompany the study:
+
+1. ***Data Sets*** -- Includes a description of all the data files. It is divided into N subsections
+
+::: {.incremental}
+- Data on Mortality
+:::
+
+2. ***Descriptive Statistics*** -- contains descriptive statistics on mortality and weather. It is divided into two subsections.
+
+::: {.incremental}
+-Mortality
+-Weather
+:::
+
+3. ***Methodology*** -- includes a rough description of the methodology we use to estimate the effect of extreme temperatures on mortality 
+
+4. ***Results*** -- presents and discusses the main results of the research project. 
+
+
+# Replication
+
+All the raw files needed to run the code are in the [dropbox repository](https://www.dropbox.com/scl/fo/ywyo9ynmf5hu6vmi57n1s/h?dl=0&rlkey=4lqqq2m4w5t03iqks1ylbbe5r)
+
+If you want to replicate the study:
+
+Download all files of the [dropbox repository](https://www.dropbox.com/scl/fo/ywyo9ynmf5hu6vmi57n1s/h?dl=0&rlkey=4lqqq2m4w5t03iqks1ylbbe5r) while considering your computer space constraints.[^1] 
+
+The files in the repository have a folder-like structure with the following key sections:
+
+[^1]: I recommend downloading the files to an external hard drive to avoid memory issues
+
+1.  **01_RawData** -- Includes the raw data obtained from the New York State Department of Education, the New York State Department of Environmental Conservation, The Environmental Protection Agency, and the USA Census Buro.
+
+2.  **02_GenData** -- Contains the cleaned version of the raw data-files I use throughout the study.
+
+3.  **03_scripts** -- Includes all the R-scripts I use to transform the raw data into a useful format, perform descriptive statistics, and run my empirical specifications. I divide this folder into N scripts: 
+
+
+
+4.  **web-page** -- This folder contains the Quarto files necessary to replicate this website
+
+
+

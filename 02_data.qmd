@@ -1,0 +1,144 @@
+---
+title: "Data Sets"
+author: "Luis Sarmiento, Thomas Longden, Soheil Shayegh, and Shouro Dasgupta"
+format: 
+  html: 
+    toc: true
+    warning: false
+    code-fold: true
+    code-summary: "Show the Code"
+    fontsize: "15px"
+---
+
+# Mortality
+
+```{r}
+#| echo: false
+# Set the file path
+file = gsub("/web-page","", getwd())
+# Load the data set 
+data = read_rds(paste0(file, "/02_GenData/01_mortality/CodedMortSample.rds")) |> ungroup()
+```
+
+We obtain mortality data from the Mexican National Institute of Geography and Statistics (INEGI). The data contains the state, county, date, and time of the event, as well as additional variables like gender, age, employment status, occupation, education, nationality, marital status, cause of death (i.e. ICD code), type of medical assistance, place of death, who certified the death, if the person died during working hours, and whether the event was pregnancy related. The data set contains more than ten million observations across `r comma(ncol(data))` variables and comes from the administrative records of 2,400 municipalities covering the period between January 1998 and December 2017. @tbl-MortID contains a series of identifiers concerning the life event. It includes the date and hour of death, the municipality id (agem), and the ICD10 written by the person who certified the life event.
+
+```{r}
+#| label: tbl-MortID
+#| tbl-cap: Identifiers of the life event
+#| tbl-cap-location: top
+#| echo: false
+# Create the plot
+kbl(select(data, date, hour, agem, StateName, CountyName, icd), booktabs = T) %>% 
+  kable_classic_2(full_width = F, html_font = "Cambria", bootstrap_option = c("hover")) %>% 
+  column_spec(c(1), italic = T, color = "DarkBlue")
+
+```
+
+@tbl-MortSocial presents the set of socio-demographic characteristics included in the main file. *unemployment* is a categorical variable equal to employed, unemployed, unknown, or kids. INEGI required administrative units to record the employment status at the time of death from 2012. The *unknown* option occurs when the administrative unit ignores the employment status of the person and the *kids* option applies to children younger than five. *age* refers to the age in years of the diseased. We round the age to zero for kids under one. *married* can take four values; single, NotSingle, unknown, and kids. In this context, *kids* are persons younger than twelve. *educ* is the education level of the deseased Note that the classification of educational attainment differs from the period between 1998-2012 and 2013-2017 (see @tbl-EducCodes). *job* refers to the occupation of the person at the time of the life-event. As with *educ*, the occupation categories differ for all years before and after 2012 (see @tbl-JobCodes).
+
+
+```{r}
+#| label: tbl-MortSocial
+#| tbl-cap: Socio-demographic characteristics of the deseased
+#| tbl-cap-location: top
+#| echo: false
+
+# Create the plot
+kbl(select(data, date, hour, unemployment, age, married, EducEnglish, JobEnglish) |> 
+      mutate_at(vars(EducEnglish, JobEnglish), str_wrap, 15), booktabs = T) %>% 
+  kable_classic_2(full_width = F, html_font = "Cambria", bootstrap_option = c("hover")) %>% 
+  column_spec(c(1), italic = T, color = "DarkBlue") 
+
+```
+
+@tbl-MortEvent presents characteristics of the life-event. **WorkDeath** is an indicator variable equal to *WorkDeath* if the person died because of work-related activities, *NoWorkDeath* if the person died at work from natural causes, *NaturalDeath* when the person died from natural causes outside work, and *Unknown* **AccidentPlaceEnglish** and **DeathPlaceEnglish** indicate the place of death in case of accidents and natural deaths. As with the education and occupation identifiers, the place identifiers also differ after 2012.
+
+
+```{r}
+#| label: tbl-MortEvent
+#| tbl-cap: Characteristics of the life event
+#| tbl-cap-location: top
+#| echo: false
+# Set the file path
+file = gsub("/web-page","", getwd())
+# Create the plot
+kbl(select(data, date, hour,WorkDeath, AccidentPlaceEnglish, DeathPlaceEnglish)) %>% 
+   kable_classic_2(full_width = F, html_font = "Cambria", bootstrap_option = c("hover")) %>% 
+  column_spec(c(1), italic = T, color = "DarkBlue")
+
+```
+
+
+# Weather
+```{r}
+#| echo: false
+# Set the file path
+file = gsub("/web-page","", getwd())
+# Load the data set 
+weather = read_rds(paste0(file, "/02_GenData/02_weather/RawWeatherSample.rds")) |> ungroup()
+idw = read_rds(paste0(file, "/02_GenData/02_weather/WeatherSampleIDW.rds")) |> ungroup()
+```
+
+Temperature data comes from 1,994 automated weather stations administered by the National Water Commission (CONAGUA). Each station has daily measures of precipitation, evaporation, as well as the maximum and minimum temperature for each day between January 1990 and December 2017. @tbl-WeatherRaw shows a sample of the raw station data. It contains the station id, its geographical location (lon and lat), the date of observation, precipitation, evaporation, and the maximum and minimum temperature recorded in that day.
+
+
+```{r}
+#| label: tbl-WeatherRaw
+#| tbl-cap: Raw weather data
+#| tbl-cap-location: top
+#| echo: false
+# Create the plot
+kbl(weather, booktabs = T) %>% 
+  kable_classic_2(full_width = F, html_font = "Cambria", bootstrap_option = c("hover")) %>% 
+  column_spec(c(1), italic = T, color = "DarkBlue")
+
+```
+
+
+# Appendix
+::: panel-tabset
+
+#### Education Code Groups
+```{r}
+#| echo: false
+#| label: tbl-EducCodes
+#| tbl-cap: Education catgories across time
+read_excel(paste0(file, "/01_RawData/05_other/CodeBook.xlsx"), sheet = "Education") |> 
+  select(EnglishName, from, to) %>% kbl(.) %>% 
+  kable_classic_2(full_width = F, html_font = "Cambria", bootstrap_option = c("hover")) %>% 
+  column_spec(c(1), italic = T, color = "DarkBlue") %>% scroll_box(height = "300px")
+```
+
+#### Occupation Code Groups
+```{r}
+#| echo: false
+#| label: tbl-JobCodes
+#| tbl-cap: Occupation catgories across time
+read_excel(paste0(file, "/01_RawData/05_other/CodeBook.xlsx"), sheet = "Occupation") |> 
+  select(EnglishName, from, to) %>% kbl(.) %>% 
+  kable_classic_2(full_width = F, html_font = "Cambria", bootstrap_option = c("hover")) %>% 
+  column_spec(c(1), italic = T, color = "DarkBlue") %>% scroll_box(height = "300px")
+```
+
+#### Accident Place Code Groups
+```{r}
+#| echo: false
+#| label: tbl-AccidentCodes
+#| tbl-cap: Occupation catgories across time
+read_excel(paste0(file, "/01_RawData/05_other/CodeBook.xlsx"), sheet = "AccidentPlace") |> 
+  select(EnglishName, from, to) %>% kbl(.) %>% 
+  kable_classic_2(full_width = F, html_font = "Cambria", bootstrap_option = c("hover")) %>% 
+  column_spec(c(1), italic = T, color = "DarkBlue") %>% scroll_box(height = "300px")
+```
+
+#### Death Place Code Groups
+```{r}
+#| echo: false
+#| label: tbl-DeathCodes
+#| tbl-cap: Occupation catgories across time
+read_excel(paste0(file, "/01_RawData/05_other/CodeBook.xlsx"), sheet = "DeathPlace") |> 
+  select(EnglishName, from, to) %>% kbl(.) %>% 
+  kable_classic_2(full_width = F, html_font = "Cambria", bootstrap_option = c("hover")) %>% 
+  column_spec(c(1), italic = T, color = "DarkBlue") %>% scroll_box(height = "300px")
+```
+:::
