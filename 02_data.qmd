@@ -94,6 +94,19 @@ kbl(weather, booktabs = T) %>%
 
 ```
 
+To match these weather station data to each county we calculate the distance to the center of each administrative region. For those municipalities within a 200 kilometers radius we obtain daily county values for temperature using inverse distance weighting techniques.
+
+```{r}
+#| label: tbl-WeatherIDW
+#| tbl-cap: Raw weather data
+#| tbl-cap-location: top
+#| echo: false
+# Create the plot
+kbl(idw, booktabs = T) %>% 
+  kable_classic_2(full_width = F, html_font = "Cambria", bootstrap_option = c("hover")) %>% 
+  column_spec(c(1), italic = T, color = "DarkBlue")
+
+```
 
 # Appendix
 ::: panel-tabset

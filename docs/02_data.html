@@ -267,7 +267,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<p><a href="#tbl-MortSocial">Table&nbsp;2</a> presents the set of socio-demographic characteristics included in the main file. <em>unemployment</em> is a categorical variable equal to employed, unemployed, unknown, or kids. INEGI required administrative units to record the employment status at the time of death from 2012. The <em>unknown</em> option occurs when the administrative unit ignores the employment status of the person and the <em>kids</em> option applies to children younger than five. <em>age</em> refers to the age in years of the diseased. We round the age to zero for kids under one. <em>married</em> can take four values; single, NotSingle, unknown, and kids. In this context, <em>kids</em> are persons younger than twelve. <em>educ</em> is the education level of the deseased Note that the classification of educational attainment differs from the period between 1998-2012 and 2013-2017 (see <a href="#tbl-EducCodes">Table&nbsp;5</a>). <em>job</em> refers to the occupation of the person at the time of the life-event. As with <em>educ</em>, the occupation categories differ for all years before and after 2012 (see <a href="#tbl-JobCodes">Table&nbsp;6</a>).</p>
+<p><a href="#tbl-MortSocial">Table&nbsp;2</a> presents the set of socio-demographic characteristics included in the main file. <em>unemployment</em> is a categorical variable equal to employed, unemployed, unknown, or kids. INEGI required administrative units to record the employment status at the time of death from 2012. The <em>unknown</em> option occurs when the administrative unit ignores the employment status of the person and the <em>kids</em> option applies to children younger than five. <em>age</em> refers to the age in years of the diseased. We round the age to zero for kids under one. <em>married</em> can take four values; single, NotSingle, unknown, and kids. In this context, <em>kids</em> are persons younger than twelve. <em>educ</em> is the education level of the deseased Note that the classification of educational attainment differs from the period between 1998-2012 and 2013-2017 (see <a href="#tbl-EducCodes">Table&nbsp;6</a>). <em>job</em> refers to the occupation of the person at the time of the life-event. As with <em>educ</em>, the occupation categories differ for all years before and after 2012 (see <a href="#tbl-JobCodes">Table&nbsp;7</a>).</p>
 <div class="cell tbl-cap-location-top">
 <div class="cell-output-display">
 <div id="tbl-MortSocial" class="anchored">
@@ -516,6 +516,91 @@ activities </td>
 </div>
 </div>
 </div>
+<p>To match these weather station data to each county we calculate the distance to the center of each administrative region. For those municipalities within a 200 kilometers radius we obtain daily county values for temperature using inverse distance weighting techniques.</p>
+<div class="cell tbl-cap-location-top">
+<div class="cell-output-display">
+<div id="tbl-WeatherIDW" class="anchored">
+
+<table class=" lightable-classic-2" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;"><caption>Table&nbsp;5:  Raw weather data </caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> station </th>
+   <th style="text-align:right;"> lon </th>
+   <th style="text-align:right;"> lat </th>
+   <th style="text-align:left;"> date </th>
+   <th style="text-align:right;"> rain </th>
+   <th style="text-align:right;"> evap </th>
+   <th style="text-align:right;"> max </th>
+   <th style="text-align:right;"> min </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 203802 </td>
+   <td style="text-align:right;"> -116.908 </td>
+   <td style="text-align:right;"> 32.447 </td>
+   <td style="text-align:left;"> 1998-01-01 </td>
+   <td style="text-align:right;"> 0.0 </td>
+   <td style="text-align:right;"> 3.6 </td>
+   <td style="text-align:right;"> 25.0 </td>
+   <td style="text-align:right;"> 13.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 203802 </td>
+   <td style="text-align:right;"> -116.908 </td>
+   <td style="text-align:right;"> 32.447 </td>
+   <td style="text-align:left;"> 1998-01-02 </td>
+   <td style="text-align:right;"> 1.4 </td>
+   <td style="text-align:right;"> NaN </td>
+   <td style="text-align:right;"> 18.5 </td>
+   <td style="text-align:right;"> 10.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 203802 </td>
+   <td style="text-align:right;"> -116.908 </td>
+   <td style="text-align:right;"> 32.447 </td>
+   <td style="text-align:left;"> 1998-01-03 </td>
+   <td style="text-align:right;"> 6.5 </td>
+   <td style="text-align:right;"> 0.4 </td>
+   <td style="text-align:right;"> 17.0 </td>
+   <td style="text-align:right;"> 12.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 203802 </td>
+   <td style="text-align:right;"> -116.908 </td>
+   <td style="text-align:right;"> 32.447 </td>
+   <td style="text-align:left;"> 1998-01-04 </td>
+   <td style="text-align:right;"> 3.3 </td>
+   <td style="text-align:right;"> 1.2 </td>
+   <td style="text-align:right;"> 18.0 </td>
+   <td style="text-align:right;"> 11.0 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 203802 </td>
+   <td style="text-align:right;"> -116.908 </td>
+   <td style="text-align:right;"> 32.447 </td>
+   <td style="text-align:left;"> 1998-01-05 </td>
+   <td style="text-align:right;"> 0.0 </td>
+   <td style="text-align:right;"> 2.4 </td>
+   <td style="text-align:right;"> 16.0 </td>
+   <td style="text-align:right;"> 7.5 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;font-style: italic;color: DarkBlue !important;"> 203802 </td>
+   <td style="text-align:right;"> -116.908 </td>
+   <td style="text-align:right;"> 32.447 </td>
+   <td style="text-align:left;"> 1998-01-06 </td>
+   <td style="text-align:right;"> 0.0 </td>
+   <td style="text-align:right;"> 0.5 </td>
+   <td style="text-align:right;"> 18.0 </td>
+   <td style="text-align:right;"> 3.5 </td>
+  </tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 </section>
 <section id="appendix" class="level1">
 <h1>Appendix</h1>
@@ -527,7 +612,7 @@ activities </td>
 <div class="cell-output-display">
 <div id="tbl-EducCodes" class="anchored">
 
-<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; "><table class=" lightable-classic-2" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;"><caption>Table&nbsp;5:  Education catgories across time </caption>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; "><table class=" lightable-classic-2" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;"><caption>Table&nbsp;6:  Education catgories across time </caption>
  <thead>
   <tr>
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> EnglishName </th>
@@ -648,7 +733,7 @@ activities </td>
 <div class="cell-output-display">
 <div id="tbl-JobCodes" class="anchored">
 
-<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; "><table class=" lightable-classic-2" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;"><caption>Table&nbsp;6:  Occupation catgories across time </caption>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; "><table class=" lightable-classic-2" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;"><caption>Table&nbsp;7:  Occupation catgories across time </caption>
  <thead>
   <tr>
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> EnglishName </th>
@@ -839,7 +924,7 @@ activities </td>
 <div class="cell-output-display">
 <div id="tbl-AccidentCodes" class="anchored">
 
-<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; "><table class=" lightable-classic-2" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;"><caption>Table&nbsp;7:  Occupation catgories across time </caption>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; "><table class=" lightable-classic-2" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;"><caption>Table&nbsp;8:  Occupation catgories across time </caption>
  <thead>
   <tr>
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> EnglishName </th>
@@ -970,7 +1055,7 @@ activities </td>
 <div class="cell-output-display">
 <div id="tbl-DeathCodes" class="anchored">
 
-<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; "><table class=" lightable-classic-2" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;"><caption>Table&nbsp;8:  Occupation catgories across time </caption>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; "><table class=" lightable-classic-2" style="font-family: Cambria; width: auto !important; margin-left: auto; margin-right: auto;"><caption>Table&nbsp;9:  Occupation catgories across time </caption>
  <thead>
   <tr>
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> EnglishName </th>
